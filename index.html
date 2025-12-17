@@ -185,6 +185,61 @@
         opacity: 0;
       }
     }
+  
+    .snow-heart {
+      position: fixed;
+      top: -20px;
+      width: 14px;
+      height: 14px;
+      background: #ff4d6d;
+      transform: rotate(-45deg);
+      pointer-events: none;
+      animation: fall linear forwards;
+      opacity: 1;
+    }
+
+    .snow-heart::before,
+    .snow-heart::after {
+      content: '';
+      width: 14px;
+      height: 14px;
+      background: #ff4d6d;
+      border-radius: 50%;
+      position: absolute;
+      opacity: 1;
+    }
+
+    .snow-heart::before {
+      top: -7px;
+      left: 0;
+    }
+
+    .snow-heart::after {
+      left: 7px;
+      top: 0;
+    }
+
+    @keyframes fall {
+      from {
+        transform: rotate(-45deg) translateY(0);
+        opacity: 1;
+      }
+      to {
+        transform: rotate(-45deg) translateY(110vh);
+        opacity: 1;
+      }
+    }
+
+ {
+      from {
+        transform: rotate(-45deg) translateY(0);
+        opacity: 0.6;
+      }
+      to {
+        transform: rotate(-45deg) translateY(110vh);
+        opacity: 0.2;
+      }
+    }
   </style>
 </head>
 <body>
@@ -206,7 +261,7 @@
       document.body.appendChild(star);
     }
 
-    // Fare kalpleri
+    // Fare kalpleri + parıltı (yavaş)
     document.addEventListener('mousemove', (e) => {
       const heart = document.createElement('div');
       heart.className = 'cursor-heart';
@@ -223,8 +278,21 @@
       setTimeout(() => {
         heart.remove();
         sparkle.remove();
-      }, 1000);
+      }, 2200);
     });
+
+    // Kar gibi yağan kalpler (çok hafif)
+    setInterval(() => {
+      if (document.hidden) return; // arka plandayken dur
+      const h = document.createElement('div');
+      h.className = 'snow-heart';
+      h.style.left = Math.random() * window.innerWidth + 'px';
+      const duration = Math.random() * 3 + 6; // 6–9 sn
+      h.style.animationDuration = duration + 's';
+      h.style.opacity = '1';
+      document.body.appendChild(h);
+      setTimeout(() => h.remove(), duration * 1000);
+    }, 450); // seyrek üretim
   </script>
 
 </body>
