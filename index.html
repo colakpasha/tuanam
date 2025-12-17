@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Seni Çok Seviyorum Tuana'm</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 100vw;
+      height: 100vh;
+      background: black;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Arial', sans-serif;
+      color: #ff4d6d;
+    }
+
+    .center {
+      position: absolute;
+      text-align: center;
+      animation: fadeIn 2s ease forwards;
+    }
+
+    .heart {
+      width: 120px;
+      height: 120px;
+      background: #ff4d6d;
+      position: relative;
+      transform: rotate(-45deg);
+      margin: 0 auto 35px;
+      animation: beat 1.8s infinite ease-in-out;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      width: 120px;
+      height: 120px;
+      background: #ff4d6d;
+      border-radius: 50%;
+      position: absolute;
+    }
+
+    .heart::before {
+      top: -60px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: 60px;
+      top: 0;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      width: 120px;
+      height: 120px;
+      background: #ff4d6d;
+      border-radius: 50%;
+      position: absolute;
+    }
+
+    .heart::before {
+      top: -60px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: 60px;
+      top: 0;
+    }
+
+    h1 {
+      font-size: 34px;
+      letter-spacing: 1px;
+      font-family: 'Brush Script MT', 'Segoe Script', 'Comic Sans MS', cursive;
+    }
+
+    .cursor-heart {
+      position: fixed;
+      width: 14px;
+      height: 14px;
+      background: #ff4d6d;
+      transform: rotate(-45deg);
+      pointer-events: none;
+      animation: floatUp 2.2s linear forwards;
+    }
+
+    .cursor-heart::before,
+    .cursor-heart::after {
+      content: '';
+      width: 14px;
+      height: 14px;
+      background: #ff4d6d;
+      border-radius: 50%;
+      position: absolute;
+    }
+
+    .cursor-heart::before {
+      top: -7px;
+      left: 0;
+    }
+
+    .cursor-heart::after {
+      left: 7px;
+      top: 0;
+    }
+
+    .cursor-heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .cursor-heart::after {
+      left: 10px;
+      top: 0;
+    }
+
+    @keyframes beat {
+      0% { transform: rotate(-45deg) scale(1); }
+      50% { transform: rotate(-45deg) scale(1.15); }
+      100% { transform: rotate(-45deg) scale(1); }
+    }
+
+    @keyframes floatUp {
+      0% {
+        opacity: 1;
+        transform: rotate(-45deg) translateY(0) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: rotate(-45deg) translateY(-25px) scale(0.6);
+      }
+    }
+      100% {
+        opacity: 0;
+        transform: rotate(-45deg) translateY(-40px) scale(0.5);
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: twinkle 2s infinite ease-in-out;
+    }
+
+    .sparkle {
+      position: fixed;
+      width: 6px;
+      height: 6px;
+      background: radial-gradient(circle, #fff, transparent 70%);
+      pointer-events: none;
+      animation: sparkleFade 0.8s forwards;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+
+    @keyframes sparkleFade {
+      from {
+        transform: scale(1);
+        opacity: 1;
+      }
+      to {
+        transform: scale(2);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="center">
+    <div class="heart"></div>
+    <h1>Seni çok seviyorum Tuana'm</h1>
+  </div>
+
+  <script>
+    // Arka plan yıldızları
+    const starCount = 120;
+    for (let i = 0; i < starCount; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.left = Math.random() * window.innerWidth + 'px';
+      star.style.top = Math.random() * window.innerHeight + 'px';
+      star.style.animationDuration = (Math.random() * 3 + 1) + 's';
+      document.body.appendChild(star);
+    }
+
+    // Fare kalpleri
+    document.addEventListener('mousemove', (e) => {
+      const heart = document.createElement('div');
+      heart.className = 'cursor-heart';
+      heart.style.left = e.clientX + 'px';
+      heart.style.top = e.clientY + 'px';
+      document.body.appendChild(heart);
+
+      const sparkle = document.createElement('div');
+      sparkle.className = 'sparkle';
+      sparkle.style.left = e.clientX + 'px';
+      sparkle.style.top = e.clientY + 'px';
+      document.body.appendChild(sparkle);
+
+      setTimeout(() => {
+        heart.remove();
+        sparkle.remove();
+      }, 1000);
+    });
+  </script>
+
+</body>
+</html>
